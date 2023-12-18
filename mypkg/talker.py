@@ -22,7 +22,7 @@ class Talker(Node):
         self.pub.publish(msg)
 
         if random_number % 111 == 0:
-            self.get_logger().info(f'ゾロ目！{self.count}回目')
+            self.get_logger().info(f'Triples! at count {self.count}')
             self.destroy_node()
             rclpy.shutdown()
 
