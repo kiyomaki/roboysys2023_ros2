@@ -2,14 +2,24 @@ name: test
 on: push
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container: ryuichiueda/ubuntu22.04-ros2:latest
     steps:
       - uses: actions/checkout@v2
-      - name: build and test
+      - name: Prepare ROS 2 workspace
         run: |
+          mkdir -p /root/ros2_ws/src/mypkg
           rsync -av ./ /root/ros2_ws/src/mypkg/
+      - name: Install dependencies
+        run: |
           cd /root/ros2_ws
           rosdep update
           rosdep install -i --from-path src --rosdistro humble -y
-          bash -xv ./src/mypkg/test/test.bash /root
+      - name: Build and test
+        run: |
+          . /opt/ros/humble/setup.bash
+          cd /root/ros2_ws
+          colcon build
+          . install/setup.bash
+          bash -xv ./src/mypkg/test/test.bash
+
