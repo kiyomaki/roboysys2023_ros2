@@ -1,21 +1,22 @@
 #!/bin/bash
 
 dir=~
-[ "$1" != "" ] && dir="$1"   # 引数があったら、そちらをホームに変える。
+[ "$1" != "" ] && dir="$1"
 
 cd $dir/ros2_ws
 colcon build
-source $dir/.bashrc
+source $dir/ros2_ws/install/setup.bash
 
 # 'ros2 launch' をバックグラウンドで実行
 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg.log &
 
-# ログファイルを監視し、'Triples!' メッセージが現れたら終了
-timeout=300  # 5分のタイムアウト
+# タイムアウト設定
+timeout=300
 elapsed=0
 
 while [ $elapsed -lt $timeout ]; do
-    if grep -q 'Triples! at count' /tmp/mypkg.log; then
+    # ログファイルの内容をチェック
+    if cat /tmp/mypkg.log | grep -q 'Triples! at count'; then
         echo "Test passed: 'Triples! at count' message was received."
         kill %1
         exit 0
