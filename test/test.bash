@@ -23,3 +23,6 @@ done
 # バックグラウンドプロセスの終了
 kill %1
 
+# ROS 2ノードを停止
+ros2 node list | xargs -L1 ros2 node kill
+
