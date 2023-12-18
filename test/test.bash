@@ -4,13 +4,11 @@
 dir=~
 [ "$1" != "" ] && dir="$1"
 cd $dir/ros2_ws
-source $dir/.bashrc
+sudo rosdep fix-permissions
+source source /opt/ros/humble/setup.bash
 
 # ノードの起動とログファイルの設定
 ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg_test.log &
-
-# ノードが起動するまでの短い遅延を追加
-sleep 10
 
 # テストのタイムアウト設定
 timeout=300
