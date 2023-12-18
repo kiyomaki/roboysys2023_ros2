@@ -19,10 +19,10 @@ class Listener(Node):
     def listener_callback(self, msg):
         count, number = msg.data.split(':')
         number = int(number)
-        self.get_logger().info(f'Received: "{number}" {count}回目')
+        self.get_logger().info(f'Received: "{number}" at count {count}')
 
         if number % 111 == 0:
-            self.get_logger().info(f'ゾロ目！ {count}回目')
+            self.get_logger().info(f'Triples! at count {count}')
             self.destroy_node()
             rclpy.shutdown()
 
