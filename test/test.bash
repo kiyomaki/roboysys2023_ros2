@@ -15,6 +15,11 @@ sleep 5
 # 1分間待機
 sleep 60
 
+# ログファイルの内容を表示（デバッグ用）
+echo "Log file contents:"
+cat /tmp/mypkg_test.log
+echo "End of log file contents"
+
 # ログファイルを確認し、特定のメッセージが現れるかをチェック
 if grep -q 'Triples! at count' /tmp/mypkg_test.log; then
     echo "Test passed: 'Triples! at count' message was detected."
