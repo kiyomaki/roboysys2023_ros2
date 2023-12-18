@@ -6,10 +6,23 @@ jobs:
     container: ryuichiueda/ubuntu22.04-ros2:latest
     steps:
       - uses: actions/checkout@v2
-      - name: build and test
+      - name: Setup ROS 2 environment
+        run: |
+          source /opt/ros/humble/setup.bash
+      - name: Sync code to ROS 2 workspace
         run: |
           rsync -av ./ /root/ros2_ws/src/mypkg/
+      - name: Install dependencies
+        run: |
           cd /root/ros2_ws
           rosdep update
           rosdep install -i --from-path src --rosdistro humble -y
+      - name: Build the ROS 2 workspace
+        run: |
+          cd /root/ros2_ws
+          colcon build
+      - name: Run tests
+        run: |
+          source /root/ros2_ws/install/setup.bash
           bash -xv ./src/mypkg/test/test.bash /root
+
