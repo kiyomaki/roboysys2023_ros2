@@ -50,4 +50,4 @@ ROS 2がインストールされている環境で、以下の手順に従って
 - © 2023 Makishi Kiyosawa
 - このソフトウェアは3条項BSDライセンスの下で再頒布および使用が許可されています。
 - このパッケージのコードの一部は，下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです。
- - https://github.com/ryuichiueda/my_slides/tree/master/robosys_2022
+  https://github.com/ryuichiueda/my_slides/tree/master/robosys_2022
