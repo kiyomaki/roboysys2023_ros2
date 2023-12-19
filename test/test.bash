@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright 2023 Makishi Kiyosawa
+# SPDX-License-Identifier: BSD-3-Clause
 
 # ワークスペースのセットアップ
 dir=~
