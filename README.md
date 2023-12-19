@@ -18,14 +18,14 @@ ROS 2がインストールされている環境で、以下の手順に従って
 1. ソースコードをROS 2ワークスペースにクローンします。
 - githubアカウントがある場合
    ```
-   git clone git@github.com:kiyomaki/robosys2023_ros2.git
    cd ~/ros2_ws/src
+   git clone git@github.com:kiyomaki/robosys2023_ros2.git
    ```
 
 - githubアカウントがない場合
    ```
-   git clone https://github.com:kiyomaki/robosys2023_ros2
    cd ~/ros2_ws/src
+   git clone https://github.com:kiyomaki/robosys2023_ros2
    ```
 
 2. ワークスペースに移動し、ビルドします。
