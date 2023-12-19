@@ -1,4 +1,6 @@
-import launch
+# Copyright 2023 Makishi Kiyosawa
+# SPDX-License-Identifier: BSD-3-Clause
+
 import launch.actions
 import launch.substitutions
 import launch_ros.actions
