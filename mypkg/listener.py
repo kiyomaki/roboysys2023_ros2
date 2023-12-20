@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright 2023 Makishi Kiyosawa
+# SPDX-License-Identifier: BSD-3-Clause
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
