@@ -35,22 +35,24 @@ ROS 2がインストールされている環境で、以下の手順に従って
 以下は`launch`ファイルのコマンドを使用し、`talker`および`listener`ノードを実行した際の出力例です。
    ```
    [INFO] [launch]: Default logging verbosity is set to INFO
-   [INFO] [talker-1]: process started with pid [1075]
-   [INFO] [listener-2]: process started with pid [1077]
-   [listener-2] [INFO] [1703090915.388954260] [listener]: Received: "729" at count 1
-   [listener-2] [INFO] [1703090915.880331977] [listener]: Received: "388" at count 2
-   [listener-2] [INFO] [1703090916.381651076] [listener]: Received: "385" at count 3
+   [INFO] [talker-1]: process started with pid [4178]
+   [INFO] [listener-2]: process started with pid [4180]
+   [listener-2] [INFO] [1703109098.693587310] [listener]: Received: "547" at count 1
+   [listener-2] [INFO] [1703109099.188154957] [listener]: Received: "799" at count 2
+   [listener-2] [INFO] [1703109099.688553699] [listener]: Received: "430" at count 3
    ...（中略）...
-   [listener-2] [INFO] [1703090922.381005589] [listener]: Received: "555" at count 15
-   [listener-2] [INFO] [1703090922.381614854] [listener]: Triples! at count 15
-   [talker-1] [INFO] [1703090922.388203096] [talker]: Triples! at count 15
+   [listener-2] [INFO] [1703109120.689886059] [listener]: Received: "444" at count 45
+   [listener-2] [INFO] [1703109120.690689903] [listener]: Statistics - Count: 45, Average: 570.53, Med   ian: 568, Max: 997, Min: 106, Sum: 25674
+   [talker-1] [INFO] [1703109120.697894380] [talker]: Triples! at count 45
 
    ```
 ## ノードとトピックの概要
 
-- **Talker** (`talker`): 0.5秒ごとに、連番とランダムな数値（100〜999の範囲）を含むメッセージを生成し、 `countup` トピックにパブリッシュします。ランダムな数値が111で割り切れる場合、ノードはログに `'Triples! at count [カウント数]'` と出力し、シャットダウンします。
-- **Listener** (`listener`): `countup` トピックからメッセージを受け取り、受信したメッセージの数値とカウントをログに出力します。受信した数値が111で割り切れる場合、ノードはログに同様のメッセージを出力し、シャットダウンします。
-- **トピック** (`countup`) : `String` 型のメッセージを使用し、 `talker` ノードからパブリッシュされるメッセージを含みます。各メッセージはカウントとランダムな数値を含んでいます。
+- **Talker** (`talker`): 0.5秒ごとに、連番とランダムな数値（100〜999の範囲）を含むメッセージを生成し、 `countup` トピックにパブリッシュします。ランダムな数値が111で割り切れる場合（ゾロ目の場合）、ノードはログに `'Triples! at count [カウント数]'` と出力し、シャットダウンします。
+
+- **Listener** (`listener`): `countup` トピックからメッセージを受け取り、受信したメッセージの数値とカウントをログに出力します。受信した数値が111で割り切れる場合（ゾロ目の場合）、ノードは平均、中央値、最大値、最小値、合計の統計情報を計算し、ログに出力してからシャットダウンします。これにより、ゾロ目が出るまでに生成されたデータの統計的傾向を理解することができます。
+
+- **トピック** (`countup`): `String` 型のメッセージを使用し、`talker` ノードからパブリッシュされるメッセージを含みます。各メッセージはカウントとランダムな数値を含んでいます。
 
 ## ライセンス・著作権
 
