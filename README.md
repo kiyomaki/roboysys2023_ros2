@@ -1,4 +1,4 @@
-# ROS2 Countup Publisher
+# ROS2 Statistical Count Analyzer
 
 [![test](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml)
 
