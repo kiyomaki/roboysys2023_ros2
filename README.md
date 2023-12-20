@@ -42,7 +42,7 @@ ROS 2がインストールされている環境で、以下の手順に従って
    [listener-2] [INFO] [1703109099.688553699] [listener]: Received: "430" at count 3
    ...（中略）...
    [listener-2] [INFO] [1703109120.689886059] [listener]: Received: "444" at count 45
-   [listener-2] [INFO] [1703109120.690689903] [listener]: Statistics - Count: 45, Average: 570.53, Med   ian: 568, Max: 997, Min: 106, Sum: 25674
+   [listener-2] [INFO] [1703109120.690689903] [listener]: Statistics - Count: 45, Average: 570.53, Median: 568, Max: 997, Min: 106, Sum: 25674
    [talker-1] [INFO] [1703109120.697894380] [talker]: Triples! at count 45
 
    ```
