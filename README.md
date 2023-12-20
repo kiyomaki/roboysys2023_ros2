@@ -31,7 +31,7 @@ ROS 2がインストールされている環境で、以下の手順に従って
    ros2 launch mypkg talk_listen.launch.py
    ```
 
-##実行例
+## 実行例
 以下は`launch`ファイルのコマンドを使用し、`talker`および`listener`ノードを実行した際の出力例です。
    ```
    [INFO] [launch]: Default logging verbosity is set to INFO
