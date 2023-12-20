@@ -22,6 +22,17 @@ elapsed=0
 while [ $elapsed -lt $timeout ]; do
     if grep -q 'Triples! at count' /tmp/mypkg_test.log; then
         echo "Test passed: 'Triples! at count' message was detected."
+        # 統計情報の確認
+        if grep -q 'Statistics - Count' /tmp/mypkg_test.log &&
+           grep -q 'Average:' /tmp/mypkg_test.log &&
+           grep -q 'Median:' /tmp/mypkg_test.log &&
+           grep -q 'Max:' /tmp/mypkg_test.log &&
+           grep -q 'Min:' /tmp/mypkg_test.log &&
+           grep -q 'Sum:' /tmp/mypkg_test.log; then
+            echo "Test passed: Statistical information was found."
+        else
+            echo "Test failed: Statistical information was not found."
+        fi
         exit 0
     fi
     sleep 1
