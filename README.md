@@ -2,7 +2,9 @@
 
 [![test](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml)
 
-このROS 2パッケージは、メッセージを定期的にパブリッシュする `talker` ノードと、これらのメッセージを受け取る `listener` ノードを含んでいます。 `talker` ノードは、カウントとランダムな数値を組み合わせたメッセージを生成し、 `countup` トピックにパブリッシュします。 `listener` ノードはこのトピックからメッセージを受け取り、ログにその内容とカウントを出力します。
+  このROS 2パッケージは、メッセージを定期的にパブリッシュする `talker` ノードと、これらのメッセージを受け取る `listener` ノードを含んでいます。
+ 
+  `talker` ノードは、カウントとランダムな数値を組み合わせたメッセージを生成し、 `countup` トピックにパブリッシュします。 `listener` ノードはこのトピックからメッセージを受け取り、ログにその内容とカウントを出力します。
 
 ## 動作環境
 
