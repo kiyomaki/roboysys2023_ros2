@@ -15,13 +15,6 @@
 ROS 2がインストールされている環境で、以下の手順に従ってパッケージを使用します：
 
 1. ソースコードをROS 2ワークスペースに`clone`します。
-- githubアカウントがある場合
-   ```
-   cd ~/ros2_ws/src
-   git clone git@github.com:kiyomaki/robosys2023_ros2.git
-   ```
-
-- githubアカウントがない場合
    ```
    cd ~/ros2_ws/src
    git clone https://github.com:kiyomaki/robosys2023_ros2
@@ -38,6 +31,21 @@ ROS 2がインストールされている環境で、以下の手順に従って
    ros2 launch mypkg talk_listen.launch.py
    ```
 
+##実行例
+以下は`launch`ファイルのコマンドを使用し、`talker`および`listener`ノードを実行した際の出力例です。
+   ```
+   [INFO] [launch]: Default logging verbosity is set to INFO
+   [INFO] [talker-1]: process started with pid [1075]
+   [INFO] [listener-2]: process started with pid [1077]
+   [listener-2] [INFO] [1703090915.388954260] [listener]: Received: "729" at count 1
+   [listener-2] [INFO] [1703090915.880331977] [listener]: Received: "388" at count 2
+   [listener-2] [INFO] [1703090916.381651076] [listener]: Received: "385" at count 3
+   ...（中略）...
+   [listener-2] [INFO] [1703090922.381005589] [listener]: Received: "555" at count 15
+   [listener-2] [INFO] [1703090922.381614854] [listener]: Triples! at count 15
+   [talker-1] [INFO] [1703090922.388203096] [talker]: Triples! at count 15
+
+   ```
 ## ノードとトピックの概要
 
 - **Talker** (`talker`): 0.5秒ごとに、連番とランダムな数値（100〜999の範囲）を含むメッセージを生成し、 `countup` トピックにパブリッシュします。ランダムな数値が111で割り切れる場合、ノードはログに `'Triples! at count [カウント数]'` と出力し、シャットダウンします。
