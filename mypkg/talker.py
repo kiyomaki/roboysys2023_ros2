@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright 2023 Makishi Kiyosawa
 # SPDX-License-Identifier: BSD-3-Clause
-
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -9,27 +8,24 @@ import random
 
 class Talker(Node):
     def __init__(self):
-        super().__init__('talker')
-        self.pub = self.create_publisher(String, 'countup', 10)
-        self.count = 0
-        self.create_timer(0.5, self.cb)
+        super().__init__('command_talker')
+        self.publisher = self.create_publisher(String, 'robot_commands', 10)
+        self.timer = self.create_timer(1.0, self.publish_command)
 
-    def cb(self):
-        self.count += 1
-        random_number = random.randint(100, 999)
+    def publish_command(self):
+        commands = ['forward', 'backward', 'turn_left', 'turn_right', 'stop']
+        command = random.choice(commands)
         msg = String()
-        msg.data = f'{self.count}:{random_number}'
-        self.pub.publish(msg)
+        msg.data = command
+        self.publisher.publish(msg)
+        self.get_logger().info(f'Sending Command: {command}')
 
-        if random_number % 111 == 0:
-            self.get_logger().info(f'Triples! at count {self.count}')
-            self.destroy_node()
-            rclpy.shutdown()
-
-def main():
-    rclpy.init()
+def main(args=None):
+    rclpy.init(args=args)
     talker = Talker()
     rclpy.spin(talker)
+    talker.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
