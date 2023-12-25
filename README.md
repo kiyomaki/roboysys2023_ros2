@@ -1,10 +1,10 @@
-# ROS2 Statistical Count Analyzer
+# ROS2 Robot Simulation commands
 
 [![test](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml)
 
-  このROS 2パッケージは、メッセージを定期的にパブリッシュする `talker` ノードと、これらのメッセージを受け取る `listener` ノードを含んでいます。
+  このROS 2パッケージは、シンプルなロボットの動作をシミュレートする `talker` ノードと `listener` ノードを含んでいます。
  
-  `talker` ノードは、カウントとランダムな数値を組み合わせたメッセージを生成し、 `countup` トピックにパブリッシュします。 `listener` ノードはこのトピックからメッセージを受け取り、ログにその内容とカウントを出力します。
+  `talker` ノードはランダムな動作コマンド（前進、後退、左回転、右回転など）を生成し、`robot_commands` トピックにパブリッシュします。`listener` ノードはこのトピックからコマンドを受け取り、GUI上でロボットの動きをシミュレートします。
 
 ## 動作環境
 
@@ -39,22 +39,20 @@ ROS 2がインストールされている環境で、以下の手順に従って
    [INFO] [launch]: Default logging verbosity is set to INFO
    [INFO] [talker-1]: process started with pid [4178]
    [INFO] [listener-2]: process started with pid [4180]
-   [listener-2] [INFO] [1703109098.693587310] [listener]: Received: "547" at count 1
-   [listener-2] [INFO] [1703109099.188154957] [listener]: Received: "799" at count 2
-   [listener-2] [INFO] [1703109099.688553699] [listener]: Received: "430" at count 3
+   [listener-2] [INFO] [1703109098.693587310] [listener]: Robot is executing: forward
+   [listener-2] [INFO] [1703109099.188154957] [listener]: Robot is executing: turn_left
+   [listener-2] [INFO] [1703109099.688553699] [listener]: Robot is executing: turn_right
    ...（中略）...
-   [listener-2] [INFO] [1703109120.689886059] [listener]: Received: "444" at count 45
-   [listener-2] [INFO] [1703109120.690689903] [listener]: Statistics - Count: 45, Average: 570.53, Median: 568, Max: 997, Min: 106, Sum: 25674
-   [talker-1] [INFO] [1703109120.697894380] [talker]: Triples! at count 45
+   [listener-2] [INFO] [1703109120.689886059] [listener]: Robot is executing: stop
 
    ```
 ## ノードとトピックの概要
 
-- **Talker** (`talker`): 0.5秒ごとに、連番とランダムな数値（100〜999の範囲）を含むメッセージを生成し、 `countup` トピックにパブリッシュします。ランダムな数値が111で割り切れる場合（ゾロ目の場合）、ノードはログに `'Triples! at count [カウント数]'` と出力し、シャットダウンします。
+- **Talker** (`talker`): このノードはランダムなロボットの動作コマンドを生成し、`robot_commands` トピックにパブリッシュします。
 
-- **Listener** (`listener`): `countup` トピックからメッセージを受け取り、受信したメッセージの数値とカウントをログに出力します。受信した数値が111で割り切れる場合（ゾロ目の場合）、ノードは平均、中央値、最大値、最小値、合計の統計情報を計算し、ログに出力してからシャットダウンします。これにより、ゾロ目が出るまでに生成されたデータの統計的傾向を理解することができます。
+- **Listener** (`listener`): `robot_commands` トピックからコマンドを受け取り、Tkinterウィンドウ上でロボットの動きをシミュレートします。
 
-- **トピック** (`countup`): `String` 型のメッセージを使用し、`talker` ノードからパブリッシュされるメッセージを含みます。各メッセージはカウントとランダムな数値を含んでいます。
+- **トピック** (`robot_commands`): `String` 型のメッセージを使用し、`talker` ノードからパブリッシュされるコマンドを含みます。
 
 ## ライセンス・著作権
 
