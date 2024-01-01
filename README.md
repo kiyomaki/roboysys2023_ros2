@@ -38,7 +38,15 @@ ROS 2がインストールされている環境で、以下の手順に従って
    [INFO] [launch]: Default logging verbosity is set to INFO
    [INFO] [talker-1]: process started with pid [1075]
    [INFO] [listener-2]: process started with pid [1077]
-   ...（実行例の内容）...
+   [listener-2] [INFO] [1704095987.633712183] [listener]: Received: "164" at count 1
+   [listener-2] [INFO] [1704095988.119657203] [listener]: Received: "309" at count 2
+   [listener-2] [INFO] [1704095988.619007484] [listener]: Received: "850" at count 3
+   ,,,(省略),,,
+   [listener-2] [INFO] [1704096027.620142934] [listener]: Received: "899" at count 81
+   [listener-2] [INFO] [1704096028.120085688] [listener]: Received: "666" at count 82
+   [listener-2] [INFO] [1704096028.121525863] [listener]: Statistics - Count: 82, Average: 551.93, Median: 585.0, Max: 994, Min: 113, Sum: 45258
+   [talker-1] [INFO] [1704096028.150836400] [talker]: Triples! at count 82
+
    ```
 
 ## ノードとトピックの概要
