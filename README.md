@@ -1,10 +1,8 @@
-# ROS2 Robot Simulation commands
+# ROS2 Countup Publisher with Statistical Analysis
 
 [![test](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kiyomaki/roboysys2023_ros2/actions/workflows/test.yml)
 
-  このROS 2パッケージは、シンプルなロボットの動作をシミュレートする `talker` ノードと `listener` ノードを含んでいます。
- 
-  `talker` ノードはランダムな動作コマンド（前進、後退、左回転、右回転など）を生成し、`robot_commands` トピックにパブリッシュします。`listener` ノードはこのトピックからコマンドを受け取り、GUI上でロボットの動きをシミュレートします。
+このROS 2パッケージは、ランダムに生成された数値を使用して統計解析を行う機能を備えています。パッケージには、メッセージを定期的にパブリッシュする `talker` ノードと、これらのメッセージを受け取り統計情報を計算する `listener` ノードが含まれています。 `talker` ノードはカウントとランダムな数値を組み合わせたメッセージを `countup` トピックにパブリッシュし、`listener` ノードはこのトピックからメッセージを受け取り、データの統計的傾向を分析します。
 
 ## 動作環境
 
@@ -34,29 +32,28 @@ ROS 2がインストールされている環境で、以下の手順に従って
    ```
 
 ## 実行例
-以下は`launch`ファイルのコマンドを使用し、`talker`および`listener`ノードを実行した際の出力例です。
+
+以下は `launch` ファイルのコマンドを使用して `talker` および `listener` ノードを実行した際の出力例です。
    ```
    [INFO] [launch]: Default logging verbosity is set to INFO
-   [INFO] [talker-1]: process started with pid [4178]
-   [INFO] [listener-2]: process started with pid [4180]
-   [listener-2] [INFO] [1703109098.693587310] [listener]: Robot is executing: forward
-   [listener-2] [INFO] [1703109099.188154957] [listener]: Robot is executing: turn_left
-   [listener-2] [INFO] [1703109099.688553699] [listener]: Robot is executing: turn_right
-   ...（中略）...
-   [listener-2] [INFO] [1703109120.689886059] [listener]: Robot is executing: stop
-
+   [INFO] [talker-1]: process started with pid [1075]
+   [INFO] [listener-2]: process started with pid [1077]
+   ...（実行例の内容）...
    ```
+
 ## ノードとトピックの概要
 
-- **Talker** (`talker`): このノードはランダムなロボットの動作コマンドを生成し、`robot_commands` トピックにパブリッシュします。
+- **Talker** (`talker`): 0.5秒ごとに、連番とランダムな数値（100〜999の範囲）を含むメッセージを生成し、 `countup` トピックにパブリッシュします。
 
-- **Listener** (`listener`): `robot_commands` トピックからコマンドを受け取り、Tkinterウィンドウ上でロボットの動きをシミュレートします。
+- **Listener** (`listener`): `countup` トピックからメッセージを受け取り、受信したメッセージの数値とカウントをログに出力します。また、ランダム数値が111で割り切れる場合に、受け取ったデータの平均、中央値、最大値、最小値、合計を計算し、統計的な洞察を提供します。
 
-- **トピック** (`robot_commands`): `String` 型のメッセージを使用し、`talker` ノードからパブリッシュされるコマンドを含みます。
+- **トピック** (`countup`): `String` 型のメッセージを使用し、`talker` ノードからパブリッシュされるメッセージを含みます。各メッセージはカウントとランダムな数値を含んでいます。
 
 ## ライセンス・著作権
 
 - このソフトウェアは3条項BSDライセンスの下で再頒布および使用が許可されています。
 - このパッケージのコードの一部は，下記のスライド（CC-BY-SA 4.0 by Ryuichi Ueda）のものを，本人の許可を得て自身の著作としたものです。
-  https://github.com/ryuichiueda/my_slides/tree/master/robosys_2022
+  [Ryuichi Ueda's slides](https://github.com/ryuichiueda/my_slides/tree/master/robosys_2022)
 - © 2023 Makishi Kiyosawa
+
+
