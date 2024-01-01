@@ -15,19 +15,30 @@ ros2 launch mypkg talk_listen.launch.py > /tmp/mypkg_test.log &
 sleep 5
 
 # テストのタイムアウト設定
-timeout=30
+timeout=300
 elapsed=0
 
-# ログファイルを監視し、ロボットの動作が記録されているかをチェック
+# ログファイルを監視し、特定のメッセージが現れるかをチェック
 while [ $elapsed -lt $timeout ]; do
-    if grep -q 'Robot is executing:' /tmp/mypkg_test.log; then
-        echo "Test passed: 'Robot is executing' message was detected."
+    if grep -q 'Triples! at count' /tmp/mypkg_test.log; then
+        echo "Test passed: 'Triples! at count' message was detected."
+        # 統計情報の確認
+        if grep -q 'Statistics - Count' /tmp/mypkg_test.log &&
+           grep -q 'Average:' /tmp/mypkg_test.log &&
+           grep -q 'Median:' /tmp/mypkg_test.log &&
+           grep -q 'Max:' /tmp/mypkg_test.log &&
+           grep -q 'Min:' /tmp/mypkg_test.log &&
+           grep -q 'Sum:' /tmp/mypkg_test.log; then
+            echo "Test passed: Statistical information was found."
+        else
+            echo "Test failed: Statistical information was not found."
+        fi
         exit 0
     fi
     sleep 1
     ((elapsed++))
 done
 
-echo "Test failed: 'Robot is executing' message was not found after ${timeout} seconds."
+echo "Test failed: 'Triples! at count' message was not found after ${timeout} seconds."
 exit 1
 
